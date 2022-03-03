@@ -19,7 +19,7 @@ Once you have completed the Database and Model tasks run:
 
 ```php artisan migrate --seed```
 
-There  are a set of tests implemented for you to check your work against, you can run them at any time using:
+There  are a set of tests implemented for you to check your work against, you will need to add a file called ```database.sqlite``` to the ```database directory```. Once you have done this you can run them at any time using:
 
 ```php artisan test```
 
