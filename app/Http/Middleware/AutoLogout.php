@@ -22,12 +22,20 @@ class AutoLogout
      */
     public function handle(Request $request, Closure $next)
     {
+        // Check inactivity of the logged in user
         if (Auth::check()) {
             $key = 'last_active_' . Auth::user()->id;
             if (!Cache::has($key)) {
                 Cache::forever($key, time());
             } elseif ((time() - Cache::get($key)) > $this->timeout) {
                 Cache::forget($key);
+                Auth::logout();
+                return Redirect::route('login');
+            }
+        }
+        // If the user forced to become inactive will be logged out
+        if (Auth::check()) {
+            if (!$request->user()->active) {
                 Auth::logout();
                 return Redirect::route('login');
             }
