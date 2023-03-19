@@ -13,7 +13,7 @@ return new class extends Migration {
     public function up()
     {
         Schema::table('contacts', function (Blueprint $table) {
-            $table->foreignId('account_id')->after('id')->constrained()->cascadeOnDelete();
+            $table->foreignId('account_id')->after('id')->constrained('accounts')->cascadeOnDelete();
         });
     }
 
